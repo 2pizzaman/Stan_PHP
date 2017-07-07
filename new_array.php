@@ -56,12 +56,13 @@ echo "2.Количество исполнителей: ".count($all_band)."<br /
 
 //3) Необходимо удалить все альбомы, датированные 2000-ым годом
 $no_2000=array();
-foreach ($discography as $value){
-    if (isset($discography['year']) && $value['year'] =='2000'){
-       unset($discography['year']);
+
+foreach ($discography as $key => $value){
+
+    if (isset($value['year']) && $value['year'] =='2000'){
+       unset($discography[$key]);
     }
 }
-var_dump($discography);
 
 //4) Необходимо посчитать количество всех альбомов в жанре trip-hop
 $genre_th=array();
@@ -80,7 +81,7 @@ foreach ($discography as $key => $value) {
     }
 }
 unset($value);
-echo "<br/>\n5.Количество всех исполнителей, которые выпускали альбомы в 1994 году: ". $i ."<br/>\n";
+echo "<br/>\n 5.Количество всех исполнителей, которые выпускали альбомы в 1994 году: ". $i ."<br/>\n";
 
 //6) Необходимо определить альбом с наибольшим и наименьшим количеством композиций и вывести эти две цифры
 
@@ -89,18 +90,24 @@ foreach ($discography as $value){
     $album_song[$value['name']]=$value['count_songs'];
 }
 asort($album_song);
-$sort=array_keys($album_song);//PHP Fatal error:  Uncaught Error: Call to undefined function array_key() in /var/www/html/PROJECTION/PROJECT_PHP/new_array.php:92
-echo 'Альбом с наименьшим кол-вом песен: ' . $sort[0].'<br/>\n';
+$sort=array_keys($album_song);
+echo '6. <br/>\n';
+echo 'Альбом с наименьшим кол-вом песен: ' . $sort[0].'<br/>\n ';
 echo 'Альбом с наибольшим кол-вом песен: ' . end($sort).'<br/>\n';
 
 //7) Необходимо преобразить массив, сгруппировав данные в определенной иерархии
 $new_discography=array();
   foreach ($discography as $value){
        $bn_key=$value['band'] . '+' . $value['name'];
+
+       if (!isset($value['year'])) {
+           var_dump($value);die;
+       }
+
        $new_discography[$value['year']][$value['genre']][$bn_key]=$value['count_songs'];
-       ///PHP Notice:  Undefined index: year in /var/www/html/PROJECTION/PROJECT_PHP/new_array.php on line
+
   }
-    echo var_dump($new_discography);
+    print_r($new_discography);
 
 
 ?>
