@@ -1,0 +1,22 @@
+2 | .git | dir | 
+3 | .idea | dir | 
+4 | W3IKaSG.gif | file | gif | 746075 | 
+5 | arrChuk.php | file | php | 83 | 
+6 | file.php | file | php | 7582 | 
+7 | file_1.php | file | php | 3101 | 
+8 | file_2.php | file | php | 2383 | 
+9 | file_3.php | file | php | 1129 | 
+10 | file_4.php | file | php | 1804 | 
+11 | football.sql | file | sql | 14029 | 
+12 | function.php | file | php | 6560 | 
+13 | my_papo4ka | dir | 
+14 | new_array.php | file | php | 6471 | 
+15 | openserver.php | file | php | 85 | 
+16 | probyu.php | file | php | 1430 | 
+17 | scan_resultats.txt | file | txt | 534 | 
+18 | string.php | file | php | 2046 | 
+19 | switch.php | file | php | 813 | 
+20 | varic.php | file | php | 1361 | 
+21 | work.php | file | php | 14 | 
+22 | work_var.php | file | php | 0 | 
+23 | zametki.txt | file | txt | 2 | 
