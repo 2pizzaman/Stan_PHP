@@ -1,0 +1,89 @@
+ПРАКТИЧEСКОЕ ЗАДАНИЕ
+1) Необходимо выбрать всех игроков с именем, которое начинается на букву 'а'
+
+SELECT * 
+FROM player 
+WHERE firstname LIKE 'а%'
+
+2) Необходимо выбрать всех игроков с именем, в котором есть сочетание букв 'ни'
+
+SELECT * 
+FROM player 
+WHERE firstname LIKE '%ни%'
+
+3) Необходимо выбрать всех игроков, у которых имя или фамилия заканчивается на букву 'c'
+
+SELECT * 
+FROM player 
+WHERE firstname LIKE '%с'  or lastname LIKE '%с'
+
+4) Необходимо выбрать всех капитанов команд
+
+SELECT * 
+FROM player 
+WHERE is_captain ='1'
+
+5) Необходимо посчитать количество игроков, играющих в позиции "Защитник" (position_id = 2)
+
+SELECT COUNT(position_id)
+FROM player
+WHERE position_id='2'
+
+6) Необходимо посчитать количество нападающих футбольного клуба "Динамо Киев" (team_id = 1)
+
+SELECT COUNT(player_id)
+FROM player
+WHERE team_id='1' AND position_id='4'
+
+7) Необходимо выбрать всех полузащитников футбольного клуба "Карпаты" (team_id = 6)
+
+SELECT COUNT(player_id)
+FROM player
+WHERE team_id='6' AND position_id='3'
+
+8) Необходимо выбрать все стадионы, у которых вместимость больше 20000
+
+SELECT *
+FROM stadium
+WHERE opacity>20000
+
+9) Необходимо посчитать суммарную вместимость всех стадионов
+
+SELECT SUM(opacity)
+FROM stadium
+
+10) Необходимо посчитать количество стадионов в каждом городе
+
+SELECT COUNT(stadium_id) AS stadium_count,city_id
+FROM stadium
+GROUP BY city_id
+
+11) Необходимо посчитать среднюю вместимость всех стадионов
+
+SELECT AVG(opacity)
+FROM stadium
+
+12) Необходимо выбрать стадионы городов Киев или Харьков и все стадионы со вместимостью меньше 25000
+
+SELECT *
+FROM stadium
+WHERE city_id='1' or city_id='3' OR opacity<'25000'
+
+13) Необходимо выбрать всех игроков футбольного клуба "Шахтер", отсортировав по алфавиту по фамилиям
+
+SELECT * 
+FROM `player` 
+WHERE team_id='2' ORDER by lastname
+
+14) Необходимо выбрать все стадионы, отсортировав по вместимости от большей вместимости к меньшей
+
+SELECT * 
+FROM `stadium` 
+ORDER BY opacity DESC
+
+15) Необходимо посчитать количество всех стадионов, которые находятся не в Киеве
+
+SELECT COUNT(stadium_id) 
+FROM `stadium` 
+WHERE city_id !='1'
+
