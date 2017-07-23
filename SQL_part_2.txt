@@ -1,0 +1,94 @@
+1. Необходимо сделать выборку названий городов, в которых есть стадионы с вместимостью больше 20000
+
+SELECT s.name AS stadium_name, c.name AS city_name, `opacity`
+FROM stadium s
+INNER JOIN city c ON ( c.city_id = s.city_id )
+WHERE `opacity` > '20000'
+ORDER BY `city_name`
+
+SELECT c.name
+FROM city c
+INNER JOIN stadium s ON(c.city_id=s.stadium_id)
+WHERE `opacity` > '20000'
+GROUP BY c.name
+
+2. Необходимо сделать выборку всех стадионов, в названии городов которых содержит букву "к"
+
+SELECT s.name
+FROM stadium s 
+INNER JOIN city c ON(s.city_id=c.city_id AND c.name LIKE '%к%')
+
+3. Необходимо сделать выборку названий городов, в которых находится больше одного стадиона
+
+SELECT c.name, count(s.city_id) as stadium_count 
+FROM city c
+INNER JOIN stadium s ON(c.city_id = s.city_id)
+GROUP BY s.city_id
+HAVING (stadium_count > 1)
+
+4. Необходимо посчитать количество нападающих в командах, вместимость стадиона которой меньше 40000
+
+SELECT COUNT(p.position_id), t.name 
+FROM player p
+INNER JOIN team t ON(p.team_id = t.team_id)
+INNER JOIN stadium s ON(s.stadium_id = t.stadium_id)
+WHERE s.opacity<'40000' AND p.position_id = 1
+GROUP BY t.name
+
+5. Необходимо сделать выборку всех игроков позиции "полузащитник", команды которых играют в городах, в названии которых есть буква "в"
+
+SELECT  p.lastname ,c.name
+FROM player p
+INNER JOIN team t ON(p.team_id=t.team_id)
+INNER JOIN city c ON(c.city_id=t.city_id)
+WHERE c.name LIKE ('%в%')
+
+6. Необходимо посчитать количество игроков, играющих за команды, которые базируются в городах с двумя и более стадионами
+
+не работает
+
+SELECT count(p.player_id) AS player_count, t.name AS team_name,
+c.name AS city_name,
+count(DISTINCT s.stadium_id) AS stadium_count
+FROM player p
+INNER JOIN team t ON (t.team_id = p.team_id)
+INNER JOIN city c ON (c.city_id = t.city_id)
+INNER JOIN stadium s ON (s.city_id = c.city_id)
+GROUP BY s.city_id
+HAVING stadium_count > 1
+
+7. Необходимо в выборке вывести в одном поле информацию об игроке - "Имя игрока - Наименование позиции - Наименование команды - Наименование города"
+
+SELECT   CONCAT_WS('-', p.lastname,z.title, t.name,c.name)
+FROM player p
+INNER JOIN position z ON (z.position_id=p.position_id)
+INNER JOIN team t ON (t.team_id=p.player_id)
+INNER JOIN city c ON (t.city_id=t.city_id)
+
+SELECT p.lastname AS player_name, z.title AS position_title, t.name AS team_name, c.name AS city_play
+FROM player p
+INNER JOIN position z ON (z.position_id=p.position_id)
+INNER JOIN team t ON (t.team_id=p.player_id)
+INNER JOIN city c ON (t.city_id=t.city_id)
+
+8. Необходимо обновить название позиции "Нападающий" - поменять на "Форвард"
+
+UPDATE position
+SET title = 'Нападающий'
+WHERE title = 'Форвард'
+
+9. Необходимо всех игроков с именем "Александр" заменить на "Олександр"
+
+UPDATE player 
+SET firstname = 'Александр' 
+WHERE firstname = 'Олександр'
+
+10. Необходимо сделать выборку по стадионам, в которую будут содержаться следующие поля: 
+- минимальная вместимость стадиона
+- максимальная вместимость стадиона
+- среднее арифметическое значение вместимости
+- количество стадионов 
+- количество городов, в которых есть стадионы
+
+SELECT MIN(opacity) AS opacity_min, MAX(opacity) AS opacity_max, AVG(opacity) AS opacity_avg, COUNT( stadium_id) AS stadium_count,COUNT(DISTINCT(city_id)) as count_city
+FROM stadium
