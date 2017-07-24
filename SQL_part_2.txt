@@ -45,9 +45,7 @@ WHERE c.name LIKE ('%в%')
 
 6. Необходимо посчитать количество игроков, играющих за команды, которые базируются в городах с двумя и более стадионами
 
-не работает
-
-SELECT count(p.player_id) AS player_count, t.name AS team_name,
+SELECT count(DISTINCT p.player_id) AS player_count, t.name AS team_name,
 c.name AS city_name,
 count(DISTINCT s.stadium_id) AS stadium_count
 FROM player p
