@@ -1,4 +1,5 @@
 <?php
+
 $city_name='Киев';
 
 $stadium_name='Олимпийский';
@@ -33,6 +34,7 @@ class Stadium
 {
     private $stadium_name;
     private $opacity;
+    private $city_name = null;
 
     public function __construct($stadium_name, $opacity, $city_name)
     {
@@ -62,19 +64,26 @@ class Stadium
         return $this->opacity;
     }
 
+    public function getAll()
+    {
+        return $this->opacity . "." . $this->stadium_name . "." . $this->city_name->getCity();
+    }
 }
 
 class Team
 {
     private $team_name;
     private $logo;
+    private $stadium_name = null;
+    private $opacity = null;
+    private $city_name = null;
 
     public function __construct($stadium_name, $opacity, $city_name, $logo, $team_name)
     {
         $this->team_name = $team_name;
         $this->logo = $logo;
         $this->stadium = new Stadium($stadium_name, $opacity, $city_name);
-
+        $this->city = new City($city_name);
     }
 
     public function setTeam($team_name)
@@ -97,19 +106,25 @@ class Team
         return $this->logo;
     }
 
-    /*
-     public function getSt(){
-         return $this->stadium_name.$this->opacity.$this->getCity($this->city_name);
-     }
-    */
+
+    public function getAllAll()
+    {
+
+        return $this->team_name . "." . $this->logo . "." . $this->stadium->getAll();
+
+    }
+
+    public function getTeStC()
+    {
+
+        return $this->team_name . "." . $this->logo . "." . $this->stadium->getOpacity() . "." . $this->stadium->getStadium() . "." . $this->city->getCity();
+
+    }
 }
 
-$a=new Team($stadium_name, $opacity, $city_name);
-echo $a->getSt();
-//echo getCity($team_name);
+$work = new Team($stadium_name, $opacity, $city_name, $logo, $team_name);
+echo $work->getAllAll();
+echo "\n";
+$work2 = new Team($stadium_name, $opacity, $city_name, $logo, $team_name);
+echo $work2->getTeStC();
 
-//$work = new Team($stadium_name, $opacity, $city_name, $logo, $team_name);
-//print_r($work);
-
-//$work2 = new Stadium($stadium_name, $opacity, $city_name, $logo, $team_name);
-//print_r($work2);
